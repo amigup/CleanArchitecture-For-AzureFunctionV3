@@ -6,9 +6,9 @@ Following features are covered in the reference implementation.
 
 1.	[**Dependency Injection**](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection) – abstracts to decouple volatile dependencies from their implementation. A volatile dependency is a class or module that, among other things, can contain nondeterministic behaviour or in general is something we which to be able to replace or intercept which provides components segregation and testability of components. 
 
-2.	**Input data validation** – validates the input for your API contract so that business logic only handles the business logic. With the right input data validation, the over and under data posting can be saved which leads to application more secure. Also, having input data validation at first line of défense gives to create lesser downstream objects (and their lifecycle management in GC).
+2.	[**Input data validation**](https://docs.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api) – validates the input for your API function against schema restrictions (e.g. Length restriction, Type restrictions, Required/Optional restrictions etc.) so that your core business logic class do not need to deal with that. With the right input data validation, the over and under data posting can be saved which makes the application more secure. Also, having input data validation at first line of défense gives to create lesser downstream objects (and their lifecycle management in GC).
 
-3.	**Logging and scope** – Scope defines so that all the logging at the nth invocation have the required tracing. For example, instead of passing CorrelationId to every method, the logging scope can be defined with CorrelationId at entry method which makes sure that all the logs in chain will have this property logged automatically. We can also utilize the nested scopes to 
+3.	[**Logging and scope**](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection#logging-services) – Scope defines so that all the logging at the nth invocation have the required tracing. For example, instead of passing CorrelationId to every method, the logging scope can be defined with CorrelationId at entry method which makes sure that all the logs in chain will have this property logged automatically. We can also utilize the nested scopes to capture/represent information at various levels within a request lifecycle.
 
 ```CSharp
             using (log.BeginScope(new Dictionary<string, object>()
@@ -33,7 +33,7 @@ Following features are covered in the reference implementation.
             
 ```
 
-4.	Application insights initializer – Adds the global properties in each trace/request/exception. Since, all the applications uses same GEO specific application insights so any application specific property would assist to filter to appropriate logs. For example, if you want to know which application uses most logging by common components.
+4.	[**Application insights initializer**](https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-filtering-sampling#addmodify-properties-itelemetryinitializer) – Adds the global properties in each trace/request/exception. Since, all the applications uses same GEO specific application insights so any application specific property would assist to filter to appropriate logs. For example, if you want to know which application uses most logging by common components.
 5.	Correlation provider – Provides the capability to get the corelation Id for downstream methods.
 6.	HttpContext accessor – to access the HttpContext of request.
 7.	Typed HttpClient – Provides capability to send a http request without managing life cycle of http client.
