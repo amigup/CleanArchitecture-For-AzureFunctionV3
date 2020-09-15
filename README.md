@@ -34,10 +34,10 @@ Following features are covered in the reference implementation.
 ```
 
 4.	[**Application insights initializer**](https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-filtering-sampling#addmodify-properties-itelemetryinitializer) – Adds the global properties in each trace/request/exception. Since, all the applications uses same GEO specific application insights so any application specific property would assist to filter to appropriate logs. For example, if you want to know which application uses most logging by common components.
-5.	Correlation provider – Provides the capability to get the corelation Id for downstream methods.
-6.	HttpContext accessor – to access the HttpContext of request.
-7.	Typed HttpClient – Provides capability to send a http request without managing life cycle of http client.
-8.	Retry policy – logic to retries a request in cased of expected failures.
+5.	[**Correlation provider**](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.delegatinghandler?view=netcore-3.1) – Provides the capability to get the corelation Id for downstream methods.
+6.	[**HttpContext accessor**](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-context?view=aspnetcore-3.1) – to access the HttpContext of a request in different layers of application.
+7.	[**Typed HttpClient**](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) – Provides capability to send a http request without managing life cycle of http client. We can register multiple HttpClient instances against same/different URLs based on your requirements and can use Dependency Injection to inject the instance in different application layers.
+8.	[**Retry policy**](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly) – logic to add retries for a request in cased of expected failures from a downstream system. Current implementation uses [Polly](https://github.com/App-vNext/Polly) for reference purpose.
 9.	Integration Tests
 10.	Unit Tests
 11.	Separation of layers
