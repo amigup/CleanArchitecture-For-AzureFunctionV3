@@ -1,0 +1,25 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CleanArchitecture/v16/.suo
+/.vs
+*.dll
+*.pdb
+/CleanArchitecture.Core/bin/Debug/netstandard2.0/CleanArchitecture.Core.deps.json
+/CleanArchitecture.Core/obj
+/Tests/CleanArchitecture.Functions.IntegrationTests
+/Tests/CleanArchitecture.Core.UnitTests
+/Tests
+/CleanArchitecture.Shared/obj
+/CleanArchitecture.Shared/bin/Debug/netstandard2.0
+/CleanArchitecture.Shared
+/CleanArchitecture.Infrastructure
+/CleanArchitecture.Functions/obj/Release/netcoreapp3.1
+/CleanArchitecture.Functions/obj/Debug/netcoreapp3.1
+/CleanArchitecture.Functions/obj/project.nuget.cache
+/CleanArchitecture.Functions/obj/project.assets.json
+/CleanArchitecture.Functions/obj/CleanArchitecture.Functions.csproj.nuget.g.targets
+/CleanArchitecture.Functions/obj/CleanArchitecture.Functions.csproj.nuget.g.props
+/CleanArchitecture.Functions/obj/CleanArchitecture.Functions.csproj.nuget.dgspec.json
+/CleanArchitecture.Functions/bin/Debug/netcoreapp3.1
