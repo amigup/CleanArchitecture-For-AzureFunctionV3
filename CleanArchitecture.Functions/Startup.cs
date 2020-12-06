@@ -5,8 +5,11 @@ using AZV3CleanArchitecture.Extensions;
 using AZV3CleanArchitecture.Options;
 using AZV3CleanArchitecture.Providers;
 using AZV3CleanArchitecture.Services;
+using CleanArchitecture.Core.Implementation;
+using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Infrastructure.ApplicationInsightsInitializers;
 using CleanArchitecture.Infrastructure.DelegatingHandlers;
+using CleanArchitecture.Infrastructure.Options;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -25,9 +28,10 @@ using System.Reflection;
 
 namespace AZV3CleanArchitecture
 {
-    public class Startup : FunctionsStartup
+	public class Startup : FunctionsStartup
     {
         private const string ToDoItemsService = "ToDoItemsService";
+        private const string MessageService = "MessageService";
         private const string Authorization = "Authorization";
 
         public override void Configure(IFunctionsHostBuilder builder)
@@ -99,6 +103,13 @@ namespace AZV3CleanArchitecture
             })
             .AddPolicyHandler(RetryPolicies.GetTooManyRequestsRetryPolicy(exponentialBackoffRetry: false))
             .AddHttpMessageHandler<CorrelationDelegatingHandler>();
+
+            builder.Services.AddOptions<MessageServiceOptions>()
+                            .Configure<IConfiguration>((settings, configuration) =>
+                            {
+                                configuration.GetSection(MessageService).Bind(settings);
+                            });
+            builder.Services.AddSingleton<IMessageService, MessageService>();
         }
     }
 }
